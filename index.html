@@ -209,7 +209,7 @@
 <section class="extras" id="extras">
   <style>
     .extras { max-width: 1180px; margin: 0 auto; padding: 0 24px 112px; display: grid; gap: 56px 32px; grid-template-columns: 1fr; }
-    @media (min-width: 720px) { .extras { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 720px) { .extras { grid-template-columns: 1fr 1fr; align-items: start; } }
     .drop { padding-top: 28px; border-top: 1px solid var(--line); }
     .drop h2 { margin: 0; font-weight: 300; font-size: clamp(26px, 4vw, 36px); line-height: 1.1; letter-spacing: -.02em; }
     .drop p { margin: 10px 0 20px; font-size: 15px; color: var(--steel); }
@@ -219,28 +219,47 @@
     .drop input::placeholder { color: var(--steel); }
     .drop input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .drop .field .take { width: auto; margin-top: 0; padding: 0 22px; white-space: nowrap; }
+    .entries { list-style: none; margin: 24px 0 0; padding: 0; max-height: 440px; overflow-y: auto; }
+    .entries li { padding: 12px 0; border-top: 1px solid var(--line); line-height: 1.4; overflow-wrap: anywhere; }
+    .entries li.empty { padding-top: 0; border-top: 0; font-size: 15px; color: var(--steel); }
   </style>
 
-  <form class="drop" data-table="alcohol_wishes" data-done="Добавлено в список напитков">
+  <div class="drop">
     <h2>Что купить из алкоголя</h2>
-    <p>Впишите название напитка, который хотите видеть на празднике.</p>
-    <div class="field">
+    <p>Впиши название напитка, который хочешь видеть на празднике.</p>
+    <form class="field" data-table="alcohol_wishes" data-done="Добавлено в список напитков">
       <input name="title" maxlength="120" required autocomplete="off" placeholder="Название напитка">
       <button type="submit" class="take">Добавить</button>
-    </div>
-  </form>
+    </form>
+    <ul class="entries" id="list-alcohol_wishes" aria-live="polite"></ul>
+  </div>
 
-  <form class="drop" data-table="playlist_songs" data-done="Песня добавлена в плейлист">
+  <div class="drop">
     <h2>Песни для плейлиста</h2>
-    <p>Впишите песню, которая должна прозвучать на празднике.</p>
-    <div class="field">
+    <p>Впиши песню, которая должна прозвучать на празднике.</p>
+    <form class="field" data-table="playlist_songs" data-done="Песня добавлена в плейлист">
       <input name="title" maxlength="120" required autocomplete="off" placeholder="Исполнитель — название">
       <button type="submit" class="take">Добавить</button>
-    </div>
-  </form>
+    </form>
+    <ul class="entries" id="list-playlist_songs" aria-live="polite"></ul>
+  </div>
 
   <script>
-    Array.prototype.forEach.call(document.querySelectorAll('form.drop'), function (f) {
+    var DROP_TABLES = ['alcohol_wishes', 'playlist_songs'];
+
+    function loadList(table) {
+      var ul = document.getElementById('list-' + table);
+      fetch(SB_URL + '/rest/v1/' + table + '?select=title&order=created_at.desc&limit=300', { headers: HEAD })
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function (rows) {
+          ul.innerHTML = rows.length
+            ? rows.map(function (x) { return '<li>' + esc(x.title) + '</li>'; }).join('')
+            : '<li class="empty">Пока пусто. Добавьте первым.</li>';
+        })
+        .catch(function () {});
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('form.field'), function (f) {
       f.addEventListener('submit', function (e) {
         e.preventDefault();
         var inp = f.elements.title, btn = f.querySelector('button'), v = inp.value.trim();
@@ -251,12 +270,17 @@
           headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=minimal' }, HEAD),
           body: JSON.stringify({ title: v })
         }).then(function (r) {
-          if (r.ok) { inp.value = ''; toast(f.dataset.done); }
+          if (r.ok) { inp.value = ''; toast(f.dataset.done); loadList(f.dataset.table); }
           else toast('Не получилось сохранить. Попробуйте ещё раз');
         }).catch(function () { toast('Нет связи. Попробуйте ещё раз'); })
           .then(function () { btn.disabled = false; });
       });
     });
+
+    function loadAllLists() { DROP_TABLES.forEach(loadList); }
+    loadAllLists();
+    setInterval(function () { if (!document.hidden) loadAllLists(); }, 30000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) loadAllLists(); });
   </script>
 </section>
 
