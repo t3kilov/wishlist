@@ -78,7 +78,7 @@
 
 <dialog id="dlg">
   <h2 id="dq">Зарезервировать этот подарок?</h2>
-  <p>Отменить резерв сможет только Дмитрий :C</p>
+  <p>Отменить резерв невозможно</p>
   <div class="acts">
     <button type="button" class="take ghost" id="no">Отмена</button>
     <button type="button" class="take" id="yes">Зарезервировать</button>
@@ -94,7 +94,7 @@
      ========================================================== */
   window.EXTRA_ITEMS = [
   {
-    id: "extra-1",   // не менять: этот id записан в базе
+    id: "extra-1",
     name: "Очень хайповый блендер Blendy GO 3 Black",
     link: "Blendy Go 3 - Allegro.pl",          // текст ссылки под названием
     url: "https://allegro.pl/oferta/oryginalny-blender-blendygo-3-bezprzewodowy-usb-blender-nowej-generacji-14250643346?bi_s=ads&bi_m=productlisting:desktop:query&bi_c=MzllMzJmZGItZTQxMy00NTQ2LWJhNzMtNThiOTAyMjRhZjhkAA&bi_t=ape&referrer=proxy&emission_unit_id=42029950-a6e8-4f35-90ae-bd3170b923b2",
@@ -102,54 +102,42 @@
     img: "extra-1.png"
   },
   {
-    id: "extra-2",   // не менять: этот id записан в базе
-    name: "",          // название; \n = перенос строки (первая строка будет жирной)
-    link: "",          // текст ссылки под названием
-    url: "",           // адрес ссылки, начинается с https://
-    price: "", // цена, например "249,00 zł" (можно оставить пустой)
-    img: "extra-2.png" // имя файла с фото, например "extra-2.png"
+    id: "extra-2",
+    name: "Сет колец Vivienne Westwood ; (Размер L)",
+    link: "VW SSEX SET - Zalando.pl",
+    url: "https://www.zalando.pl/vivienne-westwood-essex-ring-unisex-set-pierscionek-platinum-coloured-vw954l05a-d11.html",
+    price: "727,00 zł",
+    img: "extra-2.png"
   },
   {
-    id: "extra-3",   // не менять: этот id записан в базе
-    name: "",          // название; \n = перенос строки (первая строка будет жирной)
-    link: "",          // текст ссылки под названием
-    url: "",           // адрес ссылки, начинается с https://
-    price: "",         // цена, например "249,00 zł" (можно оставить пустой)
-    img: ""            // имя файла с фото, например "extra-3.jpg"
+    id: "extra-3",
+    name: "Vivienne Westwood Шарфик",
+    link: "VW Szal - Zalando.pl",
+    url: "https://www.zalando.pl/vivienne-westwood-unisex-szal-blackwhite-vw954g00o-q11.html",
+    price: "559,00 zł",
+    img: "extra-3.png"
   },
   {
-    id: "extra-4",   // не менять: этот id записан в базе
-    name: "",          // название; \n = перенос строки (первая строка будет жирной)
-    link: "",          // текст ссылки под названием
-    url: "",           // адрес ссылки, начинается с https://
-    price: "",         // цена, например "249,00 zł" (можно оставить пустой)
-    img: ""            // имя файла с фото, например "extra-4.jpg"
+    id: "extra-4",
+    name: "",
+    link: "",     
+    url: "",
+    price: "",
+    img: ""
   },
   {
-    id: "extra-5",   // не менять: этот id записан в базе
-    name: "",          // название; \n = перенос строки (первая строка будет жирной)
-    link: "",          // текст ссылки под названием
-    url: "",           // адрес ссылки, начинается с https://
-    price: "",         // цена, например "249,00 zł" (можно оставить пустой)
-    img: ""            // имя файла с фото, например "extra-5.jpg"
+    id: "extra-5",
+    name: "",
+    link: "",
+    url: "",
+    price: "",
+    img: ""
   }
   ];
 </script>
 <script>
   /* ==========================================================================
-     ССЫЛКИ — ЗАПОЛНЯЙ ЗДЕСЬ (Ctrl+F → «ССЫЛКИ — ЗАПОЛНЯЙ»)
-
-     Для позиции с несколькими ссылками укажи её id и список ссылок:
-       "id-позиции": [
-         { text: "Текст ссылки", url: "https://адрес" },
-         { text: "Ещё одна",     url: "https://адрес" }
-       ],
-     • text — то, что видно на сайте; url — куда ведёт (начинается с https://).
-     • Если url оставить пустым "", надпись будет обычным текстом без ссылки.
-     • Позиции, которых здесь нет, показывают одну ссылку из своего блока.
-     • Для новых позиций (extra-1 … extra-5) добавляй сюда строки так же:
-         "extra-1": [ { text: "...", url: "https://..." } ],
-     • После каждой строки, кроме последней, стоит запятая.
+     ССЫЛКИ двойные тут
      ========================================================================== */
   window.ITEM_LINKS = {
     "lego": [
@@ -245,7 +233,7 @@
 </script>
 
 
-<!-- ===== БЛОК «АЛКОГОЛЬ И ПЛЕЙЛИСТ» ===== -->
+<!-- ===== алкашка и плейлист » ===== -->
 <section class="extras" id="extras">
   <style>
     .extras { max-width: 1180px; margin: 0 auto; padding: 0 24px 112px; display: grid; gap: 56px 32px; grid-template-columns: 1fr; }
