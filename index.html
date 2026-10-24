@@ -583,7 +583,7 @@
   try {
     /* ---- НАСТРОЙКИ ---- */
     var PARTY = '2026-11-03T00:00:00+01:00';
-    var TICKER = ['3 ноября', 'день рождения', 'дом', 'ночёвка', 'караоке', 'плейлист', 'подарки'];
+    var TICKER = ['❖', '❤', '✿', '❖', '❤', '✿', '❖'];
 
     var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     var list = document.getElementById('list');
@@ -626,7 +626,7 @@
       var ms = new Date(PARTY) - new Date();
       if (ms <= 0) { cd.innerHTML = '<div class="now">Сегодня тот самый день</div>'; return; }
       var s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
-      cd.innerHTML = '<p>До величайшей тусы для V.I.P</p><div class="count">' + unit(d, 'дн') + unit(pad(h), 'час') + unit(pad(m), 'мин') + unit(pad(s % 60), 'сек') + '</div>';
+      cd.innerHTML = '<p>до величайшего вечера осталось: </p><div class="count">' + unit(d, 'дн') + unit(pad(h), 'час') + unit(pad(m), 'мин') + unit(pad(s % 60), 'сек') + '</div>';
     }
     tickCd(); setInterval(tickCd, 1000);
 
@@ -637,14 +637,12 @@
     mq.innerHTML = '<div class="track">' + half + half + '</div>';
     list.parentNode.insertBefore(mq, list);
 
-    /* нет фото — пустой подиум вместо «битой» картинки */
     Array.prototype.forEach.call(list.querySelectorAll('.plinth img'), function (img) {
       img.addEventListener('error', function () {
         var n = document.createElement('div'); n.className = 'none'; n.textContent = '·'; img.replaceWith(n);
       });
     });
 
-    /* плавное появление при прокрутке */
     if (!RM && 'IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (es) {
         var k = 0;
@@ -712,5 +710,14 @@
   } catch (err) { console.error(err); }
 })();
 </script>
+<style>
+  /* респонсивность фоток */
+  .item { min-width: 0; }
+  .plinth { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1;
+            min-width: 0; min-height: 0; padding: 0; overflow: hidden; }
+  .plinth img { position: absolute; top: 12%; left: 12%; width: 76%; height: 76%;
+                max-width: none; max-height: none; object-fit: contain; }
+  .plinth .none { position: absolute; inset: 0; display: grid; place-items: center; }
+</style>
 </body>
 </html>
