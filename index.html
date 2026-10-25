@@ -117,19 +117,19 @@
   },
   {
     id: "extra-4",
-    name: "",
-    link: "",     
-    url: "",
-    price: "",
-    img: ""
+    name: "Elgato Stream Deck MK.2",
+    link: "Elgato Stream Deck MK.2 - x-kom.pl",     
+    url: "https://www.x-kom.pl/p/668984-akcesorium-do-streamingu-elgato-stream-deck-mk2.html",
+    price: "549,00 zł",
+    img: "extrastream.png"
   },
   {
     id: "extra-5",
-    name: "",
-    link: "",
-    url: "",
-    price: "",
-    img: ""
+    name: "APPLE FineWoven Wallet MagSafe Black",
+    link: "APPLE FineWoven - MediaExpert.pl",
+    url: "https://www.mediaexpert.pl/smartfony-i-zegarki/akcesoria-do-telefonow/pokrowce-i-etui/etui-apple-iphone-finewoven-wallet-with-magsafe-black",
+    price: "249,00 zł",
+    img: "extra-5"
   }
   ];
 </script>
@@ -249,10 +249,10 @@
     },
     {
       id: "jbl-charge-6",
-      name: "JBL Charge 6",
-      link: "JBL Charge 6 - MediaExpert",
-      url: "https://www.mediaexpert.pl/telewizory-i-rtv/hi-fi-audio/glosniki-mobilne/glosnik-mobilny-jbl-charge-6-czarny?cto_pld=DQTfbJdYAABubXvCj0iczQ&utm_source=chatgpt.com",
-      price: "448,99 zł",
+      name: "JBL Charge 6 Red",
+      link: "JBL Charge 6 - MediaExpert.pl",
+      url: "https://www.mediaexpert.pl/telewizory-i-rtv/hi-fi-audio/glosniki-mobilne/glosnik-mobilny-jbl-charge-6-czerwony",
+      price: "479,00 zł",
       img: "jbl.png"
     },
     {
@@ -273,11 +273,11 @@
     },
     {
       id: "pad-pro-x",
-      name: "Коврик LOGITECH Pro X Control",
-      link: "Pro X Control - Media Expert",
-      url: "https://www.mediaexpert.pl/komputery-i-tablety/myszy-komputerowe/podkladki/podkladka-logitech-pro-x-control",
-      price: "299,99 zł",
-      img: "logikovr.png"
+      name: "Коврик ARTISAN NINJA FX Hien Soft XXL Wine Red",
+      link: "ARTISAN NINJA FX - Amazon.pl",
+      url: "https://www.amazon.pl/ARTISAN-NINJA-Hien-Soft-Wine/dp/B0D69P35G5?source=ps-sl-shoppingads-lpcontext&psc=1&smid=A3W1SK01IU9TZJ",
+      price: "359,00 zł",
+      img: "extra-4.png"
     },
     {
       id: "keyboard-g-pro-x",
@@ -626,7 +626,7 @@
       var ms = new Date(PARTY) - new Date();
       if (ms <= 0) { cd.innerHTML = '<div class="now">Сегодня тот самый день</div>'; return; }
       var s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
-      cd.innerHTML = '<p>до величайшего вечера осталось: </p><div class="count">' + unit(d, 'дн') + unit(pad(h), 'час') + unit(pad(m), 'мин') + unit(pad(s % 60), 'сек') + '</div>';
+      cd.innerHTML = '<p></p><div class="count">' + unit(d, 'дн') + unit(pad(h), 'час') + unit(pad(m), 'мин') + unit(pad(s % 60), 'сек') + '</div>';
     }
     tickCd(); setInterval(tickCd, 1000);
 
